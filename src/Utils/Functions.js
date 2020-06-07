@@ -1,4 +1,3 @@
-
 import {youtube_api} from '../Secrets'
 
 export const fetchData = async (type,query) =>{
@@ -17,7 +16,7 @@ export const fetchData = async (type,query) =>{
   .then(res=>res.json())
   .then(data=>{
       
-    
+   
     return(data.items)
       
   })
@@ -31,9 +30,9 @@ export const fetchLogo = async (channelId) =>{
   return await fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&fields=items%2Fsnippet%2Fthumbnails&key=AIzaSyBFl7JEY6DseZxIGNK8wAve89vsgUtzlsA`)
  .then(res=>res.json())
  .then(data=>{
-     
-    
-     return(data)
+ 
+  
+     return(data.items[0].snippet.thumbnails.default.url)
      
  })
 
