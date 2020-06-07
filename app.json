@@ -1,0 +1,10 @@
+{
+  "name": "pixelplay",
+  "displayName": "pixelplay",
+
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts/"
+    ]
+  }
+}

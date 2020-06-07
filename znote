@@ -1,0 +1,25 @@
+trending - https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=in&key=[YOUR_API_KEY] HTTP/1.1
+music - https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=in&videoCategoryId=10&key=[YOUR_API_KEY] HTTP/1.1
+
+
+
+
+
+
+= 1 - Film & Animation 
+= 2 - Autos & Vehicles
+
+= 15 - Pets & Animals
+= 17 - Sports 
+
+
+= 20 - Gaming 
+
+
+= 24 - Entertainment
+
+26 - Howto & Style
+
+28 - Science & Technology
+
+
