@@ -10,7 +10,7 @@ export function HomeTab () {
 
 export function AnimationTab () {
   return(
-   <VideoList type={'id'} query={'1'} />
+   <VideoList type={'cat_id'} query={'1'} />
   )
 }
 
@@ -22,26 +22,26 @@ export function ComedyTab () {
 
 export  function EntertainmentTab () {
     return(
-     <VideoList type={'id'} query={'24'} />
+     <VideoList type={'cat_id'} query={'24'} />
     )
 }
 
 
 export function GamingTab () {
   return(
-   <VideoList type={'id'} query={'20'} />
+   <VideoList type={'cat_id'} query={'20'} />
   )
 }
 
 export  function SongTab () {
     return(
-     <VideoList type={'id'} query={'10'} />
+     <VideoList type={'cat_id'} query={'10'} />
     )
 }
 
 export function SportsTab () {
     return(
-     <VideoList type={'id'} query={'17'} />
+     <VideoList type={'cat_id'} query={'17'} />
     )
 }
 
@@ -60,6 +60,6 @@ export function TrendingTab () {
 
 export function TechTab () {
     return(
-     <VideoList type={'id'} query={'28'} />
+     <VideoList type={'cat_id'} query={'28'} />
     )
 }

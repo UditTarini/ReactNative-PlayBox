@@ -2,24 +2,24 @@ import {youtube_api} from '../Secrets'
 
 
 
-var baseUrl01 = 'https://www.googleapis.com/youtube/v3/search?part=snippet&regionCode=in&maxResults=1&'
+var baseUrl01 = 'https://www.googleapis.com/youtube/v3/search?part=snippet&regionCode=in&maxResults=2&'
 var baseUrl02 = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&regionCode=in&maxResults=2&'
-
-export const fetchData = async (type,query) =>{
+//https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&channelId=UChuZAo1RKL85gev3Eal9_zg
+export const fetchData = async (type,filter) =>{
  
    
-   let url = 
-   (type == "id" || type == "q")?
-   (type=="q"? 
-   url = `${baseUrl01}q=${query}&type=video&key=${youtube_api}`
-  :url = `${baseUrl02}chart=mostPopular&videoCategoryId=${query}&key=${youtube_api}`)
-  :url = `${baseUrl02}chart=mostPopular&key=${youtube_api}`
- 
-  
+   
+
+   let url = ( {
+    'cat_id': `${baseUrl02}chart=mostPopular&videoCategoryId=${filter}&key=${youtube_api}`,
+    'ch_id' : `${baseUrl01}&channelId=${filter}&key=${youtube_api}`,
+    'q'     : `${baseUrl01}q=${filter}&type=video&key=${youtube_api}`,
+   } )[ type ] || `${baseUrl02}chart=mostPopular&key=${youtube_api}`;
+
   return await fetch(url)
   .then(res=>res.json())
   .then(data=>{
-   
+    console.log(url)
     return(data.items)
       
   })

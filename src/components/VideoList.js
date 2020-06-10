@@ -17,7 +17,7 @@ export default function VideoList (props) {
       fetchData(props.type,props.query).then((response) => {
         setData(response)
         })
-        console.log(cardData)
+       
    
   }, [])
     
@@ -31,7 +31,7 @@ export default function VideoList (props) {
           data={cardData}
          
           renderItem={({item})=>{
-             console.log(item.snippet.title)
+           
              return <CardItem
              videoId={props.type == 'q'? item.id.videoId : item.id}
              title={item.snippet.title}

@@ -1,21 +1,35 @@
-import React,{useState,useRef} from 'react';
-import { StyleSheet, Text, View,Dimensions,ScrollView,FlatList} from 'react-native';
+import React,{useState,useRef, useEffect} from 'react';
+import { StyleSheet, Text, View,Dimensions,ScrollView,FlatList,ActivityIndicator} from 'react-native';
 
 import YoutubePlayer from 'react-native-youtube-iframe';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import CardItem2 from '../components/Card2'
+import {fetchData} from '../Utils/Functions'
 
 const VideoPlayer = ({route})=>{
 
     let screenWidth = Dimensions.get('window').width
-    const {videoId,title,channel,channelId} = route.params
+    let screenHeight = Dimensions.get('window').height
 
+    const {videoId,title,channel,channelId} = route.params
     const playerRef = useRef(null);
     const [playing, setPlaying] = useState(true);
 
     const [loading,setLoading] = useState(false)
     const [cardData, setData] = useState([])
 
+    useEffect(() => {
+        setLoading(true)
+        fetchData('ch_id',channelId)
+        .then((resp)=>{
+           setData(resp)
+           setLoading(false)
+
+        })
+       
+       console.log(cardData)
+    }, [])
+      
    return(
        <View style={{flex:1,  }}>
  
@@ -25,9 +39,9 @@ const VideoPlayer = ({route})=>{
         width={screenWidth}
         videoId={`${videoId}`}
         play={playing}
-        onChangeState={null}
+       
         loop={true}
-        onPlaybackQualityChange={null}
+        
         volume={50}
         playbackRate={1}
         playerParams={{
