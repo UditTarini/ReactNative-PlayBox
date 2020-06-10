@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Container, Header, Tab, Tabs, ScrollableTab } from 'native-base';
 
 
-import {HomeTab,SongTab,AnimationTab,SportsTab,EntertainmentTab,GamingTab,TechTab,TrailerTab,TrendingTab,ComedyTab} from './Tabs'
-
+import {HomeTab, SongTab,AnimationTab,SportsTab,EntertainmentTab,GamingTab,TechTab,TrailerTab,TrendingTab,ComedyTab} from './Tabs/Tabs'
+//import HomeTab from "./Tabs/HomeTab"
 import HeaderBar from "../components/Header"
 
 export default class TabsScrollableExample extends Component {

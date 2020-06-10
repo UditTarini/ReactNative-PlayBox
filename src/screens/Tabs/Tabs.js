@@ -1,5 +1,12 @@
 import React from 'react';
-import VideoList from "../components/VideoList"
+import VideoList from "../../components/VideoList"
+
+export function HomeTab () {
+    return(
+     <VideoList type={null} query={null} />
+    )
+}
+
 
 export function AnimationTab () {
   return(
@@ -24,12 +31,6 @@ export function GamingTab () {
   return(
    <VideoList type={'id'} query={'20'} />
   )
-}
-
-export function HomeTab () {
-    return(
-     <VideoList type={null} query={null} />
-    )
 }
 
 export  function SongTab () {

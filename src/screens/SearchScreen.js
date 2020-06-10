@@ -1,11 +1,10 @@
 import React,{useState} from 'react';
-import { StyleSheet, Text, View,Dimensions, ScrollView, TextInput, FlatList, ActivityIndicator, Animated } from 'react-native';
-
+import { StyleSheet, Text, View,Dimensions, TextInput, FlatList, ActivityIndicator} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import CardItem2 from '../components/Card2'
-
 import {useTheme} from '@react-navigation/native'
-import {useSelector,useDispatch} from 'react-redux'
+import {fetchData} from '../Utils/Functions'
+
 
 export default function SearchScreen( {navigation} ){
     const {colors} =  useTheme()
@@ -15,12 +14,17 @@ export default function SearchScreen( {navigation} ){
     const [value,setValue] = useState("")
     const [cardData, setData] = useState([])
     const [loading,setLoading] = useState(false)
+
+    // fetchData('q',value).then((response) => {
+    //         setData(response.data) })
+    
     const fetchData = () =>{
         setLoading(true)
+    
         fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&regionCode=in&maxResults=1&q=${value}&type=video&key=AIzaSyBFl7JEY6DseZxIGNK8wAve89vsgUtzlsA`)
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
+           
             setLoading(false)
             setData(data.items)            
         })

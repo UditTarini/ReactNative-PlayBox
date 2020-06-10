@@ -5,15 +5,24 @@ import { useNavigation ,useTheme} from '@react-navigation/native';
 import {fetchLogo} from '../Utils/Functions'
 
 export default function CardItem(props){
-  let img = "https://f1.pngfuel.com/png/386/684/972/face-icon-user-icon-design-user-profile-share-icon-avatar-black-and-white-silhouette-png-clip-art.png"
+
   const navigation = useNavigation();
   const {colors} = useTheme()
   const textcolor = colors.iconColor
  
+  const [logo,setLogo] = useState(null)
+  useEffect(() => {
+  
+ 
+    fetchLogo(props.channelId).then((response) => {
+      setLogo(response)
+      })
+    })
+
   return (
     
      <TouchableOpacity
-      onPress={()=>navigation.navigate("VideoPlayerScreen",{videoId:props.videoId,title:props.title,channel:props.channel})}
+      onPress={()=>navigation.navigate("VideoPlayerScreen",{videoId:props.videoId,title:props.title,channel:props.channel,channelId:props.channelId})}
        >
        
      <View style={{marginBottom:5}}>
@@ -27,7 +36,7 @@ export default function CardItem(props){
       
          style={{width: 40, height: 40,borderRadius: 44/2}} 
          
-         source={{uri:props.logoUrl}}
+         source={{uri:logo}}
         />
        
     <View style={{ marginLeft:10}} >

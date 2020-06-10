@@ -5,17 +5,16 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import CardItem2 from '../components/Card2'
 
-
-
-
 const VideoPlayer = ({route})=>{
 
     let screenWidth = Dimensions.get('window').width
-    const {videoId,title,channel} = route.params
+    const {videoId,title,channel,channelId} = route.params
 
     const playerRef = useRef(null);
-
     const [playing, setPlaying] = useState(true);
+
+    const [loading,setLoading] = useState(false)
+    const [cardData, setData] = useState([])
 
    return(
        <View style={{flex:1,  }}>
@@ -56,9 +55,24 @@ const VideoPlayer = ({route})=>{
         
         </View>
 
-        <ScrollView>
+        {loading ?<ActivityIndicator style={{marginTop:10}} size="large" color="red"/>:null } 
+        <View>
         
-        </ScrollView>
+        <FlatList
+        contentContainerStyle={{ paddingBottom: screenHeight/7 }}    
+         data={cardData}
+        
+         renderItem={({item})=>{
+             return <CardItem2
+              videoId={item.id.videoId}
+              title={item.snippet.title}
+              channel={item.snippet.channelTitle}
+             />
+         }}
+         keyExtractor={item=>item.id.videoId}
+        />
+        
+        </View> 
  
            
        </View>
