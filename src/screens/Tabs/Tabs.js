@@ -3,7 +3,7 @@ import VideoList from "../../components/VideoList"
 
 export function HomeTab () {
     return(
-     <VideoList type={null} query={null} />
+     <VideoList type={'home'} query={null} />
     )
 }
 

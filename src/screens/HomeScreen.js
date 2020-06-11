@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Container, Header, Tab, Tabs, ScrollableTab } from 'native-base';
 
 
-import {HomeTab, SongTab,AnimationTab,SportsTab,EntertainmentTab,GamingTab,TechTab,TrailerTab,TrendingTab,ComedyTab} from './Tabs/Tabs'
-//import HomeTab from "./Tabs/HomeTab"
+import {HomeTab,SongTab,AnimationTab,SportsTab,EntertainmentTab,GamingTab,TechTab,TrailerTab,TrendingTab,ComedyTab} from './Tabs/Tabs'
+
 import HeaderBar from "../components/Header"
 
 export default class TabsScrollableExample extends Component {
@@ -18,7 +18,7 @@ export default class TabsScrollableExample extends Component {
     };
 
     return (
-      <Container  >
+      <Container>
         <HeaderBar/>
         
         <Tabs tabContainerStyle={{height: 30}} tabBarUnderlineStyle={{height: 0}} renderTabBar={()=> <ScrollableTab  />}>

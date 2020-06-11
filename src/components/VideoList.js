@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {  StyleSheet, View, FlatList} from 'react-native';
-import {fetchData} from '../Utils/Functions'
+import {fetchData, fetchHomeData} from '../Utils/Functions'
 import CardItem from "./Card"
 
 
@@ -13,10 +13,9 @@ export default function VideoList (props) {
 
     useEffect(() => {
       setLoading(true)
-   
-      fetchData(props.type,props.query).then((response) => {
-        setData(response)
-        })
+      props.type == 'home'? 
+      fetchHomeData().then(resp=>setData(resp)) :
+      fetchData(props.type,props.query).then(resp=>setData(resp))
        
    
   }, [])
@@ -33,7 +32,7 @@ export default function VideoList (props) {
           renderItem={({item})=>{
            
              return <CardItem
-             videoId={props.type == 'q'? item.id.videoId : item.id}
+             videoId={(props.type == 'q'||props.type =='home')? (item.id.videoId):(item.id)}
              title={item.snippet.title}
              channel={item.snippet.channelTitle}
              channelId={item.snippet.channelId}
