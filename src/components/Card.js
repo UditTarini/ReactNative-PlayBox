@@ -16,7 +16,7 @@ export default function CardItem(props){
     
     fetchLogo(props.channelId).then((resp) => {setLogo(resp)})
     fetchVideoInfo(props.videoId).then((resp)=>{setinfo(resp)})
-    console.log(logo,vidInfo)
+   
  }, [])
 
   return (
@@ -24,7 +24,7 @@ export default function CardItem(props){
      <TouchableOpacity
       onPress={()=>navigation.navigate("VideoPlayerScreen",
        {videoId:props.videoId,title:props.title,logo:logo,
-        channel:props.channel,channelId:props.channelId })}
+        channel:props.channel,channelId:props.channelId, vidInfo:vidInfo })}
        >
        
      <View style={{marginBottom:5}}>
@@ -55,7 +55,6 @@ export default function CardItem(props){
    >{props.title}</Text>
    <View style={{flexDirection:"row"}}>
   <Text style={{fontSize:12, color:textcolor }}>{props.channel}</Text>
-  
   <Text style={{fontSize:12, color:textcolor, marginLeft:8 }}>{abbreviateNumber(vidInfo.viewCount)} Views</Text>
   <Text style={{fontSize:12, color:textcolor, marginLeft:8 }}>{abbreviateNumber(vidInfo.likeCount)} Likes</Text>
 

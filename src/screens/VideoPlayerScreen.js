@@ -1,22 +1,34 @@
 import React,{useState,useRef, useEffect} from 'react';
-import { StyleSheet, Text, View,Dimensions,ScrollView,Image,FlatList,ActivityIndicator} from 'react-native';
-
+import { StyleSheet, Text,TouchableOpacity, View,Dimensions,ScrollView,Image,FlatList,ActivityIndicator} from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import CardItem2 from '../components/Card2'
-import {fetchData} from '../Utils/Functions'
+import {fetchData,abbreviateNumber} from '../Utils/Functions'
+
+export const BottomIcon=(props)=>{
+  return(
+  <View style={{flexDirection:"column", alignItems: 'center'}}>
+  { props.icon=='a'?
+  <AntDesign name={props.name} size={25} color="#616161"/>:
+  <MaterialIcons name={props.name} size={25} color="#616161"/>
+  }
+  <Text style={{fontSize:10,padding:5,color:'#262626'}}>{props.count}</Text>
+  </View>)
+}
 
 const VideoPlayer = ({route})=>{
 
     let screenWidth = Dimensions.get('window').width
     let screenHeight = Dimensions.get('window').height
 
-    const {videoId,title,logo,channel,channelId} = route.params
+    const {videoId,title,logo,channel,channelId,vidInfo} = route.params
     const playerRef = useRef(null);
     const [playing, setPlaying] = useState(true);
 
     const [loading,setLoading] = useState(false)
     const [cardData, setData] = useState([])
+    const [dropdown,setDropdown] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -27,11 +39,11 @@ const VideoPlayer = ({route})=>{
 
         })
        
-      
+        
     }, [])
       
    return(
-       <View style={{flex:1,  }}>
+       <View style={{flex:1 }}>
  
         <YoutubePlayer
         ref={playerRef}
@@ -50,24 +62,38 @@ const VideoPlayer = ({route})=>{
           rel:false
         }}
         />
-
-        <View style={{flexDirection:"row", margin:5,  borderBottomColor: 'grey',borderBottomWidth: 1,  }}>
+       
+       <View style={{borderBottomWidth: 1,  borderBottomColor: 'grey'}}>
+        <View style={{flexDirection:"row", margin:5  }}>
         
         <Image 
          style={{width: 40, height: 40,borderRadius: 44/2}} 
          source={{uri:logo}} />
 
         <View style={{ marginLeft:10}} >
-           <Text style={{paddingRight:10,fontSize:17, width:Dimensions.get("screen").width - 50,color:"black"}}
+          <Text style={{paddingRight:10,fontSize:17, width:Dimensions.get("screen").width - 50,color:"black"}}
            ellipsizeMode="tail"
            numberOfLines={2}
            >{title}</Text>
-          <Text style={{color:"grey",fontSize:12, color:'black',marginBottom:7 }}>{channel}</Text>
-           
-        </View>
-        
+          <View style={{flexDirection:"row"}}>
+          <Text style={{fontSize:12, color:'#262626',marginBottom:7 }}>{channel}</Text>
+          <TouchableOpacity onPress={()=>setDropdown(!dropdown)}>
+          <MaterialIcons name={dropdown?'arrow-drop-up':'arrow-drop-down'} 
+          style={{marginLeft:'70%' }} size={20} color="black" />
+          </TouchableOpacity>
+          </View>
+        </View>        
         </View>
 
+        <View style={{flexDirection:"row",justifyContent:'space-between',marginHorizontal:20}}>
+           <BottomIcon icon={'a'} name={'eye'}  count={dropdown?vidInfo.viewCount:abbreviateNumber(vidInfo.viewCount)}/>
+           <BottomIcon icon={'a'} name={'like1'} count={dropdown?vidInfo.likeCount:abbreviateNumber(vidInfo.likeCount)}/>
+           <BottomIcon icon={'a'} name={'dislike1'}  count={dropdown?vidInfo.dislikeCount:abbreviateNumber(vidInfo.dislikeCount)}/>
+           <BottomIcon name={'share'}/>
+           <BottomIcon name={'file-download'}/>
+          {/* {dropdown?<Text style={{height:200}}></Text>:null} */}
+        </View>
+       </View>
         {loading ?<ActivityIndicator style={{marginTop:10}} size="large" color="red"/>:null } 
         <View>
         
