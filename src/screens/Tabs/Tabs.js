@@ -7,6 +7,17 @@ export function HomeTab () {
     )
 }
 
+export function TrendingTab () {
+    return(
+     <VideoList type={null} query={null} />
+    )
+}
+
+export  function SongTab () {
+    return(
+     <VideoList type={'cat_id'} query={'10'} />
+    )
+}
 
 export function AnimationTab () {
   return(
@@ -33,11 +44,7 @@ export function GamingTab () {
   )
 }
 
-export  function SongTab () {
-    return(
-     <VideoList type={'cat_id'} query={'10'} />
-    )
-}
+
 
 export function SportsTab () {
     return(
@@ -52,11 +59,6 @@ export function TrailerTab () {
     )
 }
 
-export function TrendingTab () {
-    return(
-     <VideoList type={null} query={null} />
-    )
-}
 
 export function TechTab () {
     return(

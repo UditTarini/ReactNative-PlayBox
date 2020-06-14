@@ -2,27 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View,Image,Dimensions,TouchableOpacity} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation ,useTheme} from '@react-navigation/native';
-import {fetchLogo} from '../Utils/Functions'
+import {fetchLogo,fetchVideoInfo,abbreviateNumber} from '../Utils/Functions'
 
 export default function CardItem(props){
 
   const navigation = useNavigation();
   const {colors} = useTheme()
   const textcolor = colors.iconColor
- 
   const [logo,setLogo] = useState(null)
+  const [vidInfo,setinfo] = useState("")
+
   useEffect(() => {
-  
- 
-    fetchLogo(props.channelId).then((response) => {
-      setLogo(response)
-      })
-    })
+    
+    fetchLogo(props.channelId).then((resp) => {setLogo(resp)})
+    fetchVideoInfo(props.videoId).then((resp)=>{setinfo(resp)})
+    console.log(logo,vidInfo)
+ }, [])
 
   return (
     
      <TouchableOpacity
-      onPress={()=>navigation.navigate("VideoPlayerScreen",{videoId:props.videoId,title:props.title,channel:props.channel,channelId:props.channelId})}
+      onPress={()=>navigation.navigate("VideoPlayerScreen",
+       {videoId:props.videoId,title:props.title,logo:logo,
+        channel:props.channel,channelId:props.channelId })}
        >
        
      <View style={{marginBottom:5}}>
@@ -51,7 +53,13 @@ export default function CardItem(props){
    ellipsizeMode="tail"
    numberOfLines={2}
    >{props.title}</Text>
-  <Text style={{color:"grey",fontSize:12, color:textcolor }}>{props.channel}</Text>
+   <View style={{flexDirection:"row"}}>
+  <Text style={{fontSize:12, color:textcolor }}>{props.channel}</Text>
+  
+  <Text style={{fontSize:12, color:textcolor, marginLeft:8 }}>{abbreviateNumber(vidInfo.viewCount)} Views</Text>
+  <Text style={{fontSize:12, color:textcolor, marginLeft:8 }}>{abbreviateNumber(vidInfo.likeCount)} Likes</Text>
+
+  </View>
    
 </View>
 <MaterialIcons name='more-vert' size={10} color="black" />

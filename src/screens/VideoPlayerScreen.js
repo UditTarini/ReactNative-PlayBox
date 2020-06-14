@@ -1,5 +1,5 @@
 import React,{useState,useRef, useEffect} from 'react';
-import { StyleSheet, Text, View,Dimensions,ScrollView,FlatList,ActivityIndicator} from 'react-native';
+import { StyleSheet, Text, View,Dimensions,ScrollView,Image,FlatList,ActivityIndicator} from 'react-native';
 
 import YoutubePlayer from 'react-native-youtube-iframe';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -11,7 +11,7 @@ const VideoPlayer = ({route})=>{
     let screenWidth = Dimensions.get('window').width
     let screenHeight = Dimensions.get('window').height
 
-    const {videoId,title,channel,channelId} = route.params
+    const {videoId,title,logo,channel,channelId} = route.params
     const playerRef = useRef(null);
     const [playing, setPlaying] = useState(true);
 
@@ -27,7 +27,7 @@ const VideoPlayer = ({route})=>{
 
         })
        
-       console.log(cardData)
+      
     }, [])
       
    return(
@@ -49,17 +49,16 @@ const VideoPlayer = ({route})=>{
           showClosedCaptions: true,
           rel:false
         }}
-        /> 
+        />
+
         <View style={{flexDirection:"row", margin:5,  borderBottomColor: 'grey',borderBottomWidth: 1,  }}>
-        <MaterialIcons name="account-circle" size={40} color="#212121" />
-        <View style={{ marginLeft:10}} >
-           <Text style={{
-               paddingRight:10,     
-               fontSize:17,
-               width:Dimensions.get("screen").width - 50,
-               color:"black"
         
-           }}
+        <Image 
+         style={{width: 40, height: 40,borderRadius: 44/2}} 
+         source={{uri:logo}} />
+
+        <View style={{ marginLeft:10}} >
+           <Text style={{paddingRight:10,fontSize:17, width:Dimensions.get("screen").width - 50,color:"black"}}
            ellipsizeMode="tail"
            numberOfLines={2}
            >{title}</Text>
