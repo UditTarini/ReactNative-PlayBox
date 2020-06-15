@@ -33,13 +33,12 @@ const VideoPlayer = ({route})=>{
 
     useEffect(() => {
         setLoading(true)
-        fetchData('ch_id',channelId)
-        .then((resp)=>{
-           setData(resp)
-           setLoading(false)
-
+        fetchData('rel_vid',videoId).then((resp)=>
+        { console.log(resp)
+          setData(resp)
+          setLoading(false) 
         })
-        fetchData('vid_id',videoId).then((resp)=>{setDesc(resp[0].snippet.description)})
+       fetchData('vid_id',videoId).then((resp)=>{setDesc(resp[0].snippet.description)})
       
         
     }, [])

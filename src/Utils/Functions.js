@@ -2,8 +2,8 @@ import {youtube_api} from '../Secrets'
 
 
 var baseUrl = 'https://www.googleapis.com/youtube/v3/'
-var urlSearch = `${baseUrl}search?part=snippet&regionCode=in&maxResults=1&`
-var urlVideos = `${baseUrl}videos?part=snippet&regionCode=in&maxResults=2&`
+var urlSearch = `${baseUrl}search?part=snippet&regionCode=in&maxResults=4&`
+var urlVideos = `${baseUrl}videos?part=snippet&regionCode=in&maxResults=1&`
 
 
 export const fetchData = async (type,filter) =>{
@@ -12,8 +12,9 @@ export const fetchData = async (type,filter) =>{
    
     let url = ({
     'cat_id':`${urlVideos}chart=mostPopular&videoCategoryId=${filter}&key=${youtube_api}`,
-    'ch_id' :`${urlSearch}&channelId=${filter}&key=${youtube_api}`,
-    'vid_id':`${urlVideos}&id=${filter}&key=${youtube_api}`,
+    'ch_id' :`${urlSearch}channelId=${filter}&key=${youtube_api}`,
+    'vid_id':`${urlVideos}id=${filter}&key=${youtube_api}`,
+    'rel_vid':`${urlSearch}relatedToVideoId=${filter}&type=video&key=${youtube_api}`,
     'q'     :`${urlSearch}q=${filter}&type=video&key=${youtube_api}`,
      
    })[ type ] || `${urlVideos}chart=mostPopular&key=${youtube_api}`;
