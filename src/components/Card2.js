@@ -1,23 +1,28 @@
 import React,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View,Image,Dimensions,TouchableOpacity} from 'react-native';
 import { useNavigation,useTheme } from '@react-navigation/native';
-import {fetchVideoInfo,abbreviateNumber} from '../Utils/Functions'
+import {fetchVideoInfo,abbreviateNumber,fetchLogo} from '../Utils/Functions'
 
 
 export default function CardItem2(props){
     const navigation = useNavigation();
     const {colors} = useTheme()
     const textcolor = colors.iconColor
+    const [logo,setLogo] = useState(null)
     const [vidInfo,setinfo] = useState("")
 
     useEffect(() => {
+      fetchLogo(props.channelId).then((resp) => {setLogo(resp)})
       fetchVideoInfo(props.videoId).then((resp)=>{setinfo(resp)})
-      console.log(vidInfo)
+      
     }, [])
 
   return(
       <TouchableOpacity
-      onPress={()=>navigation.navigate("VideoPlayerScreen",{videoId:props.videoId,title:props.title})}
+      onPress={()=>navigation.navigate("VideoPlayerScreen",
+      {videoId:props.videoId,title:props.title,logo:logo,
+        channel:props.channel,channelId:props.channelId, 
+        vidInfo:vidInfo, desc:props.desc })}
       >
     <View style={{flexDirection:"row",margin:10,marginBottom:0}}>
         <Image 

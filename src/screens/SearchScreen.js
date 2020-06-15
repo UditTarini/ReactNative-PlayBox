@@ -15,18 +15,14 @@ export default function SearchScreen( {navigation} ){
     const [cardData, setData] = useState([])
     const [loading,setLoading] = useState(false)
 
-    // fetchData('q',value).then((response) => {
-    //         setData(response.data) })
+
     
-    const fetchData = () =>{
+    const fetchResult = () =>{
         setLoading(true)
     
-        fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&regionCode=in&maxResults=1&q=${value}&type=video&key=AIzaSyBFl7JEY6DseZxIGNK8wAve89vsgUtzlsA`)
-        .then(res=>res.json())
-        .then(data=>{
-           
-            setLoading(false)
-            setData(data.items)            
+        fetchData('q',value).then(data=>
+        {   setData(data) 
+            setLoading(false)           
         })
   }
   
@@ -58,11 +54,11 @@ export default function SearchScreen( {navigation} ){
               placeholderTextColor = "#000"
               onChangeText={text => setValue(text)} 
               value={value}
-              onSubmitEditing={() => fetchData()}
+              onSubmitEditing={() => fetchResult()}
               />
         
            <Ionicons style={{color:"black",marginLeft:20}} name="md-send" size={32}
-               onPress={()=>fetchData()}
+               onPress={()=>fetchResult()}
                />
            
         </View>
@@ -81,6 +77,8 @@ export default function SearchScreen( {navigation} ){
             videoId={item.id.videoId}
             title={item.snippet.title}
             channel={item.snippet.channelTitle}
+            channelId={item.snippet.channelId}
+            desc={item.snippet.description}
            />
        }}
        keyExtractor={item=>item.id.videoId}
