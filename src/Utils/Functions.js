@@ -1,9 +1,9 @@
 import {youtube_api} from '../Secrets'
 
 
-var baseUrl00 = 'https://www.googleapis.com/youtube/v3/'
-var baseUrl01 = `${baseUrl00}search?part=snippet&regionCode=in&maxResults=1&`
-var baseUrl02 = `${baseUrl00}videos?part=snippet&regionCode=in&maxResults=2&`
+var baseUrl = 'https://www.googleapis.com/youtube/v3/'
+var urlSearch = `${baseUrl}search?part=snippet&regionCode=in&maxResults=1&`
+var urlVideos = `${baseUrl}videos?part=snippet&regionCode=in&maxResults=2&`
 
 
 export const fetchData = async (type,filter) =>{
@@ -11,16 +11,17 @@ export const fetchData = async (type,filter) =>{
   
    
     let url = ({
-    'cat_id':`${baseUrl02}chart=mostPopular&videoCategoryId=${filter}&key=${youtube_api}`,
-    'ch_id' :`${baseUrl01}&channelId=${filter}&key=${youtube_api}`,
-    'q'     :`${baseUrl01}q=${filter}&type=video&key=${youtube_api}`,
-  
-   })[ type ] || `${baseUrl02}chart=mostPopular&key=${youtube_api}`;
+    'cat_id':`${urlVideos}chart=mostPopular&videoCategoryId=${filter}&key=${youtube_api}`,
+    'ch_id' :`${urlSearch}&channelId=${filter}&key=${youtube_api}`,
+    'vid_id':`${urlVideos}&id=${filter}&key=${youtube_api}`,
+    'q'     :`${urlSearch}q=${filter}&type=video&key=${youtube_api}`,
+     
+   })[ type ] || `${urlVideos}chart=mostPopular&key=${youtube_api}`;
 
   return await fetch(url)
   .then(res=>res.json())
   .then(data=>{
-    
+   
     return(data.items)
       
   })
@@ -31,7 +32,7 @@ export const fetchData = async (type,filter) =>{
 
 export const fetchLogo = async (channelId) =>{
  
-  return await fetch(`${baseUrl00}channels?part=snippet&id=${channelId}&fields=items%2Fsnippet%2Fthumbnails&key=${youtube_api}`)
+  return await fetch(`${baseUrl}channels?part=snippet&id=${channelId}&fields=items%2Fsnippet%2Fthumbnails&key=${youtube_api}`)
  .then(res=>res.json())
  .then(data=>{
  
@@ -44,7 +45,7 @@ export const fetchLogo = async (channelId) =>{
 }
 
 export const fetchVideoInfo = async (videoId) => {
-  return await fetch(`${baseUrl00}videos?part=statistics&id=${videoId}&key=${youtube_api}`)
+  return await fetch(`${baseUrl}videos?part=statistics&id=${videoId}&key=${youtube_api}`)
   .then(res=>res.json())
   .then(data=>{
    
@@ -71,10 +72,10 @@ export const abbreviateNumber=(value)=> {
 export const fetchHomeData = async ()=>{
  const arr=[]
 
- let url01 = `${baseUrl01}q='tech'&type=video&key=${youtube_api}`
- let url02 = `${baseUrl01}q='music'&type=video&key=${youtube_api}`
- let url03 = `${baseUrl01}q='sports'&type=video&key=${youtube_api}`
- let url04 = `${baseUrl01}q='trailer'&type=video&key=${youtube_api}`
+ let url01 = `${urlSearch}q='tech'&type=video&key=${youtube_api}`
+ let url02 = `${urlSearch}q='music'&type=video&key=${youtube_api}`
+ let url03 = `${urlSearch}q='sports'&type=video&key=${youtube_api}`
+ let url04 = `${urlSearch}q='trailer'&type=video&key=${youtube_api}`
  const url = [url01]
  //const url = [url01, url02, url03, url04]
 

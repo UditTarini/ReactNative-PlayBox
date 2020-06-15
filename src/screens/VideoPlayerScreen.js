@@ -1,5 +1,5 @@
 import React,{useState,useRef, useEffect} from 'react';
-import { StyleSheet, Text,TouchableOpacity, View,Dimensions,ScrollView,Image,FlatList,ActivityIndicator} from 'react-native';
+import { StyleSheet, Text,SafeAreaView,TouchableOpacity, View,Dimensions,ScrollView,Image,FlatList,ActivityIndicator} from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -22,12 +22,13 @@ const VideoPlayer = ({route})=>{
     let screenWidth = Dimensions.get('window').width
     let screenHeight = Dimensions.get('window').height
 
-    const {videoId,title,logo,channel,channelId,vidInfo} = route.params
+    const {videoId,title,logo,channel,channelId,vidInfo,desc} = route.params
     const playerRef = useRef(null);
     const [playing, setPlaying] = useState(true);
 
     const [loading,setLoading] = useState(false)
     const [cardData, setData] = useState([])
+    const [description, setDesc] = useState(desc)
     const [dropdown,setDropdown] = useState(false)
 
     useEffect(() => {
@@ -38,14 +39,17 @@ const VideoPlayer = ({route})=>{
            setLoading(false)
 
         })
-       
+        fetchData('vid_id',videoId).then((resp)=>{setDesc(resp[0].snippet.description)})
+      
         
     }, [])
+
+  
       
    return(
        <View style={{flex:1 }}>
- 
-        <YoutubePlayer
+     
+         <YoutubePlayer
         ref={playerRef}
         height={200}
         width={screenWidth}
@@ -61,9 +65,9 @@ const VideoPlayer = ({route})=>{
           showClosedCaptions: true,
           rel:false
         }}
-        />
-       
-       <View style={{borderBottomWidth: 1,  borderBottomColor: 'grey'}}>
+        /> 
+        <ScrollView>
+        <View style={{borderBottomWidth: 1,  borderBottomColor: 'grey'}}>
         <View style={{flexDirection:"row", margin:5  }}>
         
         <Image 
@@ -77,28 +81,35 @@ const VideoPlayer = ({route})=>{
            >{title}</Text>
           <View style={{flexDirection:"row"}}>
           <Text style={{fontSize:12, color:'#262626',marginBottom:7 }}>{channel}</Text>
-          <TouchableOpacity onPress={()=>setDropdown(!dropdown)}>
+          {/* <TouchableOpacity onPress={()=>setDropdown(!dropdown)}>
           <MaterialIcons name={dropdown?'arrow-drop-up':'arrow-drop-down'} 
           style={{marginLeft:'70%' }} size={20} color="black" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           </View>
         </View>        
         </View>
-
+       
         <View style={{flexDirection:"row",justifyContent:'space-between',marginHorizontal:20}}>
            <BottomIcon icon={'a'} name={'eye'}  count={dropdown?vidInfo.viewCount:abbreviateNumber(vidInfo.viewCount)}/>
            <BottomIcon icon={'a'} name={'like1'} count={dropdown?vidInfo.likeCount:abbreviateNumber(vidInfo.likeCount)}/>
            <BottomIcon icon={'a'} name={'dislike1'}  count={dropdown?vidInfo.dislikeCount:abbreviateNumber(vidInfo.dislikeCount)}/>
            <BottomIcon name={'share'}/>
            <BottomIcon name={'file-download'}/>
-          {/* {dropdown?<Text style={{height:200}}></Text>:null} */}
+           <TouchableOpacity onPress={()=>setDropdown(!dropdown)}>
+           <BottomIcon name={dropdown?'arrow-drop-up':'arrow-drop-down'}/>
+           </TouchableOpacity>
         </View>
-       </View>
+        {dropdown?<Text style={{color:"black",padding:10,paddingHorizontal:20}}>{description}</Text>:null}
+       
+        </View>
+    
+       
         {loading ?<ActivityIndicator style={{marginTop:10}} size="large" color="red"/>:null } 
         <View>
         
         <FlatList
-        contentContainerStyle={{ paddingBottom: screenHeight/7 }}    
+    
+         contentContainerStyle={{ paddingBottom: screenHeight/7 }}    
          data={cardData}
         
          renderItem={({item})=>{
@@ -112,8 +123,8 @@ const VideoPlayer = ({route})=>{
         />
         
         </View> 
- 
-           
+      
+        </ScrollView>
        </View>
    )
 }

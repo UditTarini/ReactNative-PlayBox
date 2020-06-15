@@ -36,7 +36,7 @@ export default function VideoList (props) {
              title={item.snippet.title}
              channel={item.snippet.channelTitle}
              channelId={item.snippet.channelId}
-          
+             desc={item.snippet.description}
              
              />
           }}

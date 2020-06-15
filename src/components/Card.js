@@ -24,7 +24,8 @@ export default function CardItem(props){
      <TouchableOpacity
       onPress={()=>navigation.navigate("VideoPlayerScreen",
        {videoId:props.videoId,title:props.title,logo:logo,
-        channel:props.channel,channelId:props.channelId, vidInfo:vidInfo })}
+        channel:props.channel,channelId:props.channelId, 
+        vidInfo:vidInfo, desc:props.desc })}
        >
        
      <View style={{marginBottom:5}}>
