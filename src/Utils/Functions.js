@@ -4,13 +4,11 @@ import {youtube_api} from '../Secrets'
 var baseUrl = 'https://www.googleapis.com/youtube/v3/'
 var urlSearch = `${baseUrl}search?part=snippet&regionCode=in&maxResults=1&`
 var urlVideos = `${baseUrl}videos?part=snippet&regionCode=in&maxResults=1&`
+var urlPlaylist = `${baseUrl}playlistItems?part=snippet&maxResults=3&`
 
-
-export const fetchData = async (type,filter) =>{
- 
   
-   
-    let url = ({
+export const fetchData = async (type,filter) =>{
+  let url = ({
     'cat_id':`${urlVideos}chart=mostPopular&videoCategoryId=${filter}&key=${youtube_api}`,
     'ch_id' :`${urlSearch}channelId=${filter}&key=${youtube_api}`,
     'vid_id':`${urlVideos}id=${filter}&key=${youtube_api}`,
@@ -26,23 +24,25 @@ export const fetchData = async (type,filter) =>{
     return(data.items)
       
   })
-
-
 }
 
+export const fetchVerticalVideo=async()=>{
+  
+  return await fetch(`${urlPlaylist}playlistId=PLIbLfYSA8ACNYCOaDWmj6EA1F1uS-pyVL&key=${youtube_api}`)
+  .then(res=>res.json())
+  .then(data=>{
+    return(data.items)
+  })
+ }
+ 
 
 export const fetchLogo = async (channelId) =>{
  
   return await fetch(`${baseUrl}channels?part=snippet&id=${channelId}&fields=items%2Fsnippet%2Fthumbnails&key=${youtube_api}`)
  .then(res=>res.json())
  .then(data=>{
- 
-     
-     return(data.items[0].snippet.thumbnails.default.url)
-     
- })
-
-
+      return(data.items[0].snippet.thumbnails.default.url)
+})
 }
 
 export const fetchVideoInfo = async (videoId) => {
@@ -92,14 +92,9 @@ for (let i=0; i<url.length; i++ )
     
 })
 }
-
 shuffleArray(arr)
-
 return arr
-
 }
-
-
 const shuffleArray=(array)=> {
   for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
