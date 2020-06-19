@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  StatusBar
-} from "react-native";
+
 import HomeScreen from "./src/screens/HomeScreen"
 import SearchScreen from "./src/screens/SearchScreen"
-import SubscribeScreen from "./src/screens/SearchScreen"
-import ExploreScreen from "./src/screens/SearchScreen"
+import SettingsScreen from "./src/screens/SettingsScreen"
+import VerticalScreen from "./src/screens/VerticalScreen"
 import VideoPlayerScreen from "./src/screens/VideoPlayerScreen"
 
 import { NavigationContainer, DefaultTheme,DarkTheme,useTheme } from '@react-navigation/native';
@@ -61,13 +56,13 @@ const StackScreen=()=> {
   
           if (route.name === 'Home') {
             iconName = 'home';
-          } else if (route.name === 'Explore') {
-            iconName = 'explore';
-          }else if(route.name === 'Subscribe'){
-            iconName = 'subscriptions'
+          } else if (route.name === 'Vertical') {
+            iconName = 'videocam';
+          }else if(route.name === 'Settings'){
+            iconName = 'settings'
           }
   
-          // You can return any component that you like here!
+      
           return <MaterialIcons name={iconName} size={28} color={color} />;
         },
       })}
@@ -78,8 +73,8 @@ const StackScreen=()=> {
       
       >
         <Tabs.Screen name="Home" component={HomeScreen} />
-        <Tabs.Screen name="Explore" component={ExploreScreen} />
-        <Tabs.Screen name="Subscribe" component={SubscribeScreen} />
+        <Tabs.Screen name="Vertical" component={VerticalScreen} />
+        <Tabs.Screen name="Settings" component={SettingsScreen} />
         
       </Tabs.Navigator>
    
