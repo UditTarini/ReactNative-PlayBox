@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Tab, Tabs, ScrollableTab } from 'native-base';
+import { Container,  Tab, Tabs, ScrollableTab } from 'native-base';
 
 
 import {HomeTab,SongTab,TrendingTab,AnimationTab,SportsTab,EntertainmentTab,GamingTab,TechTab,TrailerTab,ComedyTab} from './Tabs/Tabs'

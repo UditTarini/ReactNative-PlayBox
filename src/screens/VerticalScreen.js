@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Dimensions, PanResponder,Animated } from 'react-native';
+import { View, Text, Dimensions, PanResponder,Animated,ActivityIndicator } from 'react-native';
 import  WebView from 'react-native-webview'
 import  {fetchVerticalVideo} from '../Utils/Functions'
 
@@ -88,12 +88,11 @@ videoLayout = (i)=>{
   <WebView 
   style={{flex:1}}
   javaScriptEnabled={true}
-  source={{ uri:  `https://www.youtube.com/embed/${id}?rel=0&autoplay=0&showinfo=0&controls=0&fullscreen=1`}}/>
+  source={{ uri:  `https://www.youtube.com/embed/${id}?rel=0&autoplay=0&showinfo=0&controls=0&fullscreen=1&autoplay=1`}}/>
  </View>)
 }
 renderVideos = ()=>{
- 
-  
+   
     return this.state.videos.map((item, i) => {
       
       if(i==this.state.currentIndex-1){
@@ -131,9 +130,10 @@ renderVideos = ()=>{
 render() {
   return (
       <View style={{ flex: 1 }}>
-     
-     
-          {this.renderVideos()}
+      
+         {this.state.loading?
+         <ActivityIndicator style={{marginTop:"80%"}} size="large" color="red"/>:
+         this.renderVideos()}
       </View>
   )
 

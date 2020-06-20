@@ -5,6 +5,7 @@ import SearchScreen from "./src/screens/SearchScreen"
 import SettingsScreen from "./src/screens/SettingsScreen"
 import VerticalScreen from "./src/screens/VerticalScreen"
 import VideoPlayerScreen from "./src/screens/VideoPlayerScreen"
+import MovieScreen from "./src/screens/MovieScreen"
 
 import { NavigationContainer, DefaultTheme,DarkTheme,useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -56,7 +57,9 @@ const StackScreen=()=> {
   
           if (route.name === 'Home') {
             iconName = 'home';
-          } else if (route.name === 'Vertical') {
+          } else if(route.name === 'Movie'){
+            iconName = 'local-movies'
+          }else if (route.name === 'Vertical') {
             iconName = 'videocam';
           }else if(route.name === 'Settings'){
             iconName = 'settings'
@@ -73,6 +76,7 @@ const StackScreen=()=> {
       
       >
         <Tabs.Screen name="Home" component={HomeScreen} />
+        <Tabs.Screen name="Movie" component={MovieScreen} />
         <Tabs.Screen name="Vertical" component={VerticalScreen} />
         <Tabs.Screen name="Settings" component={SettingsScreen} />
         
