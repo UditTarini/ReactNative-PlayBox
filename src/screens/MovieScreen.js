@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
-import { Text, View, Dimensions, StyleSheet } from 'react-native';
+import { Text, View,ScrollView, Dimensions, StyleSheet } from 'react-native';
 import HeaderBar from "../components/Header"
-import Carousel from 'react-native-snap-carousel'; 
-import CarouselComponent from '../components/Carousel'
 
-import { scrollInterpolator, animatedStyles } from '../Utils/Animation';
-import { Thumbnail } from 'native-base';
+import LargeCarousel from '../components/LargeCarousel'
+import SmallCarousel from '../components/SmallCarousel'
+
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.93);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 0.6);
-
-// const DATA = [];
-// for (let i = 0; i < 10; i++) {
-//   DATA.push(i)
-// }
 
 
 export default class MovieScreen extends Component {
@@ -44,11 +38,34 @@ export default class MovieScreen extends Component {
     
     render(){
       return(
-          <View>
+        <ScrollView style={styles.container}>
           <HeaderBar/>
-       
-         <CarouselComponent  data={this.state.DATA} />
-          </View>
+          <LargeCarousel  data={this.state.DATA} />
+          
+        <SmallCarousel
+        style='stats'
+        itemsPerInterval={2}
+        items={[{
+          label: 'TODAY',
+          value: 1,
+        }, {
+          label: 'THIS WEEK',
+          value: 39,
+        }, {
+          label: 'THIS MONTH',
+          value: 120,
+        }, {
+          label: 'YESTERDAY',
+          value: 3,
+        }, {
+          label: 'LAST WEEK',
+          value: 25,
+        }, {
+          label: 'LAST MONTH',
+          value: 175,
+        }]}
+      />          
+          </ScrollView>
       )
   }
 
@@ -56,24 +73,7 @@ export default class MovieScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    carouselContainer: {
-      marginTop: 10
-    },
-    itemContainer: {
-      width: ITEM_WIDTH,
-      height: ITEM_HEIGHT,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'dodgerblue'
-    },
-    itemLabel: {
-      color: 'white',
-      fontSize: 24
-    },
-    counter: {
-      marginTop: 25,
-      fontSize: 30,
-      fontWeight: 'bold',
-      textAlign: 'center'
-    }
+  container:{
+    backgroundColor:"white"
+  }
   });

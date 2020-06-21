@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, Dimensions, StyleSheet } from 'react-native';
-import Carousel from 'react-native-snap-carousel'; // Version can be specified in package.json
-
+import { Text, View, Dimensions,Image, StyleSheet,TouchableOpacity } from 'react-native';
+import Carousel from 'react-native-snap-carousel'; 
+import MovieItem from './MovieItem'
 import { scrollInterpolator, animatedStyles } from '../Utils/Animation';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.93);
 const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 0.6);
+const TITLE_HEIGHT = Math.round(ITEM_HEIGHT * 0.25)
 
-
-export default class CarouselComponent extends Component {
+export default class LargeCarousel extends Component {
     
     constructor(props) {
         super(props);
@@ -19,11 +19,9 @@ export default class CarouselComponent extends Component {
       }
 
       
-    _renderItem({ item }) {
+    _renderItem({  }) {
         return (
-          <View style={styles.itemContainer}>
-            <Text style={styles.itemLabel}>{`Item ${item}`}</Text>
-          </View>
+          <MovieItem resizer={'large'} />
         );
     }
     
@@ -55,23 +53,7 @@ export default class CarouselComponent extends Component {
 
 const styles = StyleSheet.create({
     carouselContainer: {
-      marginTop: 50
-    },
-    itemContainer: {
-      width: ITEM_WIDTH,
-      height: ITEM_HEIGHT,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'dodgerblue'
-    },
-    itemLabel: {
-      color: 'white',
-      fontSize: 24
-    },
-    counter: {
-      marginTop: 25,
-      fontSize: 30,
-      fontWeight: 'bold',
-      textAlign: 'center'
+      marginTop: 10
     }
+
   });
