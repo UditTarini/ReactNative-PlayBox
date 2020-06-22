@@ -24,39 +24,51 @@ export default class MovieScreen extends Component {
          testData1:[],
 
          Data : [],
-         DataMostPopular:[]
+         MostPopular:[],
+         Trending:[],
+         Handpicked:[],
+         Bollywood:[],
+         Hollywood:[]
+
+
         }
       }
      UNSAFE_componentWillMount(){
      
     this.setState({testData0:ytdata.data0.items})
-    this.setState({testData1:ytdata.data1.items,loading:false})
+    this.setState({testData1:ytdata.data1.items})
 
-    //fetchData('q','top movies 2020 full movie').then(resp=>this.setState({Data:resp,loading:false}))
-    //fetchData('q','most popular new movies full length').then(resp=>this.setState({DataMostPopular:resp,loading:false}))
+    fetchData('q','new movies 2020 full movie').then(resp=>this.setState({Data:resp}))
+    fetchData('q','most popular new movies full length').then(resp=>this.setState({MostPopular:resp}))
+    fetchData('q','trending movies full length').then(resp=>this.setState({Trending:resp}))
+    fetchData('q','oscar movies full length').then(resp=>this.setState({Handpicked:resp}))
+    fetchData('q','top bollywood full movie').then(resp=>this.setState({Bollywood:resp}))
+    fetchData('q','hollywood movies full length').then(resp=>this.setState({Hollywood:resp,loading:false}))
     
      }
      
-    
+       
     
     render(){
       return(
         
         <ScrollView style={styles.container}>
-          
+        {console.log(this.state.Hollywood)}
           <HeaderBar/>
           {this.state.loading?
           <ActivityIndicator style={{marginTop:"80%"}} size="large" color="red"/>:
           <View>
-          <LargeCarousel data={this.state.testData0}  />
-          <SmallCarousel heading={'Most Popular'} data={this.state.testData1} />          
+         
+         
+          <LargeCarousel data={this.state.Data} type={'q'} />
+          <SmallCarousel heading={'Most Popular'} type={'q'} data={this.state.MostPopular} />          
+          <SmallCarousel heading={'Trending'} type={'q'} data={this.state.Trending} />          
+          <SmallCarousel heading={'Handpicked'} type={'q'} data={this.state.Handpicked} size={"mid"}/>          
+          <SmallCarousel heading={'Bollywood'} type={'q'} data={this.state.Bollywood} />          
+          <SmallCarousel heading={'Hollywood'} type={'q'} data={this.state.Hollywood} />  
+                    
           
-
-          <SmallCarousel heading={'Trending'} data={this.state.testData0} />          
-          <SmallCarousel heading={'Handpicked'} data={this.state.testData1} size={"mid"}/>          
-          <SmallCarousel heading={'Bollywood'} data={this.state.testData0} />          
-          {/* <SmallCarousel heading={'Hollywood'} items={this.state.DATA} />   */}
-      </View>      
+   </View>      
           }
           </ScrollView>
       )

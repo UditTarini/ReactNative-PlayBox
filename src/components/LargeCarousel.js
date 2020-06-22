@@ -14,25 +14,20 @@ export default class LargeCarousel extends Component {
     constructor(props) {
         super(props);
         this._renderItem = this._renderItem.bind(this)
-         }
+         
+      }
 
       
     _renderItem(items) {
+      
         return (
-          <MovieItem resizer={'large'} data={items.item}/> 
-
-        //   <FlatList
-        //   keyExtractor={item=>`${item.id}+${Math.random()}`}
-        //   horizontal={true}
-  
-        //   data={this.props.data}
-          
-        //   renderItem={({item})=>{
-        //     {console.log(item)}
-        //     return  <MovieItem resizer={'large'} data={item}/>
-        //   }}
-  
-        // />
+          <MovieItem resizer={'large'}
+             
+             videoId={items.item.id.videoId}
+             title={items.item.snippet.title}
+             channel={items.item.snippet.channelTitle}
+             channelId={items.item.snippet.channelId}
+             desc={items.item.snippet.description}/> 
         );
     }
          
@@ -40,7 +35,7 @@ export default class LargeCarousel extends Component {
     render(){
       return(
           <View>
-         {/* {console.log(this.props.data)}  */}
+       
           
           <Carousel
           ref={(c) => this.carousel = c}

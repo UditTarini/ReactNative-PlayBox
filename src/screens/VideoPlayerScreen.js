@@ -34,7 +34,8 @@ const VideoPlayer = ({route})=>{
     useEffect(() => {
         setLoading(true)
         fetchData('rel_vid',videoId).then((resp)=>
-        { console.log(resp)
+        { 
+          
           setData(resp)
           setLoading(false) 
         })
