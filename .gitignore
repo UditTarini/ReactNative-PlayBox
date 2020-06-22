@@ -61,3 +61,4 @@ buck-out/
 
 src/Secrets.js
 znote
+src/data.json

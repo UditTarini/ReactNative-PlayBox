@@ -2,9 +2,9 @@ import {youtube_api} from '../Secrets'
 
 
 var baseUrl = 'https://www.googleapis.com/youtube/v3/'
-var urlSearch = `${baseUrl}search?part=snippet&regionCode=in&maxResults=1&`
+var urlSearch = `${baseUrl}search?part=snippet&regionCode=in&maxResults=3&`
 var urlVideos = `${baseUrl}videos?part=snippet&regionCode=in&maxResults=1&`
-var urlPlaylist = `${baseUrl}playlistItems?part=snippet&maxResults=3&`
+var urlPlaylist = `${baseUrl}playlistItems?part=snippet&maxResults=2&`
 
   
 export const fetchData = async (type,filter) =>{
@@ -20,7 +20,7 @@ export const fetchData = async (type,filter) =>{
   return await fetch(url)
   .then(res=>res.json())
   .then(data=>{
-   
+  
     return(data.items)
       
   })

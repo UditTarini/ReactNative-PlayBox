@@ -5,17 +5,26 @@ const SLIDER_WIDTH = Dimensions.get('window').width;
 
 
 export  const MovieItem = (props)=>{
-    const {resizer} = props
-    let [a,b,c]=resizer == 'large'?[0.93,0.6,0.25]:[0.45,0.5,0.05]
+  
+ 
+    {console.log(props.data)}
+    
+    let [a,b,c] = ({
+      "small":[0.47,0.55],
+      "mid":[0.77,0.65],
+      "large":[0.93,0.6]
+    })[props.resizer] 
     const ITEM_WIDTH = Math.round(SLIDER_WIDTH * a);
     const ITEM_HEIGHT = Math.round(ITEM_WIDTH * b);
-    const TITLE_HEIGHT = Math.round(ITEM_HEIGHT * c)
+ 
     return(
-        <TouchableOpacity style={{...styles.itemContainer,width: ITEM_WIDTH,height: ITEM_HEIGHT}}>
+        <TouchableOpacity style={{...styles.itemContainer,width: ITEM_WIDTH,height: ITEM_HEIGHT,paddingHorizontal: 5}}>
         <Image 
-           source={{uri:'https://i.pinimg.com/736x/55/3c/50/553c50be9b34f7c4d04fb2445091a280.jpg'}}
-           style={{ width:"100%", height:ITEM_HEIGHT, borderRadius:10 }}/>
-         {/* <Text style={{...styles.itemLabel,width: ITEM_WIDTH,height: TITLE_HEIGHT}}>{`new south indian movies dubbed in hindi 2020 full love story New Hindi movie 2019`}</Text> */}
+          
+           source={{uri:props.data.snippet.thumbnails.high.url}}
+
+           style={{ width:"100%", height:ITEM_HEIGHT,borderRadius:10 }}/>
+         
         </TouchableOpacity>
     )
 
@@ -25,13 +34,9 @@ const styles = StyleSheet.create({
     itemContainer: {
         alignItems: 'center',
         justifyContent: 'center',
+        marginVertical: 7,
         
-      },
-      itemLabel: {
-        color: 'white',
-        fontSize: 13,
-        backgroundColor:"black",
-  
+        
       }
 })
 export default MovieItem

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Dimensions,Image, StyleSheet,TouchableOpacity } from 'react-native';
+import { Text, View, Dimensions,FlatList,Image, StyleSheet,TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel'; 
 import MovieItem from './MovieItem'
 import { scrollInterpolator, animatedStyles } from '../Utils/Animation';
@@ -14,21 +14,33 @@ export default class LargeCarousel extends Component {
     constructor(props) {
         super(props);
         this._renderItem = this._renderItem.bind(this)
-        
-        
-      }
+         }
 
       
-    _renderItem({  }) {
+    _renderItem(items) {
         return (
-          <MovieItem resizer={'large'} />
+          <MovieItem resizer={'large'} data={items.item}/> 
+
+        //   <FlatList
+        //   keyExtractor={item=>`${item.id}+${Math.random()}`}
+        //   horizontal={true}
+  
+        //   data={this.props.data}
+          
+        //   renderItem={({item})=>{
+        //     {console.log(item)}
+        //     return  <MovieItem resizer={'large'} data={item}/>
+        //   }}
+  
+        // />
         );
     }
+         
     
     render(){
       return(
           <View>
-          
+         {/* {console.log(this.props.data)}  */}
           
           <Carousel
           ref={(c) => this.carousel = c}
