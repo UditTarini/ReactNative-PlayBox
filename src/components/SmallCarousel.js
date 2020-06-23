@@ -1,15 +1,17 @@
 import React from 'react'
-import { View, ScrollView, Text,StyleSheet,FlatList } from 'react-native'
+import { View, Text,StyleSheet,FlatList } from 'react-native'
+import {useTheme} from '@react-navigation/native';
+
 import MovieItem from './MovieItem'
 
 export const SmallCarousel = (props) => {
-
+  const {colors} = useTheme()
   const { data, heading, size, type } = props;
   const resizer = size == "mid"?"mid":"small"
   
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>{heading}</Text>
+      <Text style={{...styles.heading,color:colors.text}}>{heading}</Text>
       
 
       <FlatList
@@ -41,7 +43,6 @@ const styles = StyleSheet.create({
     width: '100%', 
    },
   heading:{
-    color:"black",
     fontWeight:"bold",    
     fontSize:17,
     marginStart:10

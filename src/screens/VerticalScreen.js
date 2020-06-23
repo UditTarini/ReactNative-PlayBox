@@ -5,6 +5,7 @@ import  {fetchVerticalVideo} from '../Utils/Functions'
 
 let SCREEN_WIDTH = Dimensions.get('window').width
 let SCREEN_HEIGHT = Dimensions.get('window').height 
+
 export default class VerticalScreen extends Component {
   
   constructor(props) {

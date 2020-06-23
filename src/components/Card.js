@@ -8,7 +8,7 @@ export default function CardItem(props){
 
   const navigation = useNavigation();
   const {colors} = useTheme()
-  const textcolor = colors.iconColor
+  const textcolor = colors.text
   const [logo,setLogo] = useState(null)
   const [vidInfo,setinfo] = useState("")
 
@@ -22,6 +22,7 @@ export default function CardItem(props){
   return (
     
      <TouchableOpacity
+       style={{backgroundColor:colors.card}}
       onPress={()=>navigation.navigate("VideoPlayerScreen",
        {videoId:props.videoId,title:props.title,logo:logo,
         channel:props.channel,channelId:props.channelId, 
@@ -48,21 +49,21 @@ export default function CardItem(props){
        paddingRight:10,     
        fontSize:17,
        width:Dimensions.get("screen").width - 50,
-       color:textcolor
+       color:colors.text
 
    }}
    ellipsizeMode="tail"
    numberOfLines={2}
    >{props.title}</Text>
    <View style={{flexDirection:"row"}}>
-  <Text style={{fontSize:12, color:textcolor }}>{props.channel}</Text>
-  <Text style={{fontSize:12, color:textcolor, marginLeft:8 }}>{abbreviateNumber(vidInfo.viewCount)} Views</Text>
-  <Text style={{fontSize:12, color:textcolor, marginLeft:8 }}>{abbreviateNumber(vidInfo.likeCount)} Likes</Text>
+  <Text style={{fontSize:12, color:colors.text }}>{props.channel}</Text>
+  <Text style={{fontSize:12, color:colors.text, marginLeft:8 }}>{abbreviateNumber(vidInfo.viewCount)} Views</Text>
+  <Text style={{fontSize:12, color:colors.text, marginLeft:8 }}>{abbreviateNumber(vidInfo.likeCount)} Likes</Text>
 
   </View>
    
 </View>
-<MaterialIcons name='more-vert' size={10} color="black" />
+
 </View>
 </View>
 </TouchableOpacity>

@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
+import {useTheme} from '@react-navigation/native';
 import { Container,  Tab, Tabs, ScrollableTab } from 'native-base';
-
-
 import {HomeTab,SongTab,TrendingTab,AnimationTab,SportsTab,EntertainmentTab,GamingTab,TechTab,TrailerTab,ComedyTab} from './Tabs/Tabs'
-
 import HeaderBar from "../components/Header"
 
-export default class TabsScrollableExample extends Component {
+
+const HomeScreen=(Component)=>{
+  return function wraper(props){
+  const {colors} = useTheme()
+  return <Component {...props} colors={colors}/>
+ }
+}
+class ClassComponent extends Component {
+  
+  
   render() {
-     
+   
     const tabProps = {
-      tabStyle:{backgroundColor: 'white'},  
+      tabStyle:{backgroundColor: this.props.colors.background},  
       textStyle:{color: 'grey', fontWeight:'bold'},
-      activeTabStyle:{backgroundColor: '#fff'},
-      activeTextStyle:{color: '#000',fontWeight:'bold'},
+      activeTabStyle:{backgroundColor: this.props.colors.background},
+      activeTextStyle:{color: '#3edced',fontWeight:'bold'},
       
     };
 
     return (
-      <Container>
+      <Container style={{backgroundColor:"red"}}>
         <HeaderBar/>
         
         <Tabs tabContainerStyle={{height: 30}} tabBarUnderlineStyle={{height: 0}} renderTabBar={()=> <ScrollableTab  />}>
@@ -64,6 +71,8 @@ export default class TabsScrollableExample extends Component {
   }
 }
 
+
+export default HomeScreen(ClassComponent)
 
 
 

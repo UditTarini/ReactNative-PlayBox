@@ -2,14 +2,14 @@ import React from "react";
 
 import HomeScreen from "./src/screens/HomeScreen"
 import SearchScreen from "./src/screens/SearchScreen"
-import SettingsScreen from "./src/screens/SettingsScreen"
+import MenuScreen from "./src/screens/MenuScreen"
 import VerticalScreen from "./src/screens/VerticalScreen"
 import VideoPlayerScreen from "./src/screens/VideoPlayerScreen"
 import MovieScreen from "./src/screens/MovieScreen"
 
 import { NavigationContainer, DefaultTheme,DarkTheme,useTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator  } from '@react-navigation/material-bottom-tabs';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import {Provider, useSelector} from 'react-redux'
@@ -17,22 +17,12 @@ import {createStore,combineReducers} from 'redux'
 import {reducer} from './src/Reducers/Reducer'
 import {themeReducer} from './src/Reducers/themeReducer'
 
-const customDarkTheme={
-  ...DarkTheme,
-  colors:{
-    ...DarkTheme.colors,
-    headerColor:"#404040",
-    iconColor:"white",
-    tabIcon:"white"
-  }
-}
+
 const customDefaultTheme={
   ...DefaultTheme,
   colors:{
     ...DefaultTheme.colors,
-    headerColor:"white",
-    iconColor:"black",
-    tabIcon:"red"
+    background:"white",
   }
 }
 
@@ -44,10 +34,11 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer)
 
 const Stack = createStackNavigator();
-const Tabs = createBottomTabNavigator();
+const Tabs = createMaterialBottomTabNavigator ();
 
 
 const StackScreen=()=> {
+  const {colors} = useTheme()
   return (
   
       <Tabs.Navigator
@@ -61,24 +52,23 @@ const StackScreen=()=> {
             iconName = 'local-movies'
           }else if (route.name === 'Vertical') {
             iconName = 'videocam';
-          }else if(route.name === 'Settings'){
+          }else if(route.name === 'Menu'){
             iconName = 'settings'
           }
   
       
-          return <MaterialIcons name={iconName} size={28} color={color} />;
+          return <MaterialIcons name={iconName} size={22} color={color} />;
         },
       })}
-      tabBarOptions={{
-        activeTintColor: "#BB2CD9",
-        inactiveTintColor: 'gray',
-      }}
-      
+      activeColor= '#3edced'
+      inactiveColor= 'grey'
+      barStyle= {{ backgroundColor: colors.card }}
+      style={{borderBottomColor:"white"}}
       >
         <Tabs.Screen name="Home" component={HomeScreen} />
         <Tabs.Screen name="Movie" component={MovieScreen} />
         <Tabs.Screen name="Vertical" component={VerticalScreen} />
-        <Tabs.Screen name="Settings" component={SettingsScreen} />
+        <Tabs.Screen name="Menu" component={MenuScreen} />
         
       </Tabs.Navigator>
    
@@ -93,7 +83,7 @@ export  function MainNavigation() {
 
   return (
    
-    <NavigationContainer theme={theme?customDarkTheme:customDefaultTheme} >
+    <NavigationContainer theme={theme?DarkTheme:customDefaultTheme} >
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="StackScreen" component={StackScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />

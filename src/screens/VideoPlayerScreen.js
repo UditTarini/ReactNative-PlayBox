@@ -17,7 +17,7 @@ export const BottomIcon=(props)=>{
   </View>)
 }
 
-const VideoPlayer = ({route})=>{
+const VideoPlayerScreen = ({route})=>{
 
     let screenWidth = Dimensions.get('window').width
     let screenHeight = Dimensions.get('window').height
@@ -129,7 +129,7 @@ const VideoPlayer = ({route})=>{
    )
 }
 
-export default VideoPlayer
+export default VideoPlayerScreen
 
 
 

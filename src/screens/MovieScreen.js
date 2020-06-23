@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, Dimensions, StyleSheet, ActivityIndicator } from 'react-native';
 import HeaderBar from "../components/Header"
-
+import {useTheme} from '@react-navigation/native'
 import LargeCarousel from '../components/LargeCarousel'
 import SmallCarousel from '../components/SmallCarousel'
 import {fetchData} from '../Utils/Functions'
-import { Content } from 'native-base';
+
 import ytdata from '../data.json'
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.93);
-const ITEM_HEIGHT = Math.round(ITEM_WIDTH * 0.6);
 
+const MovieScreen=(Component)=>{
+  return function wraper(props){
+  const {colors} = useTheme()
+  return <Component {...props} colors={colors}/>
+ }
+}
 
-export default class MovieScreen extends Component {
+class ClassComponent extends Component {
     state = {index: 0}
     constructor(props) {
         super(props);
@@ -52,7 +57,7 @@ export default class MovieScreen extends Component {
     render(){
       return(
         
-        <ScrollView style={styles.container}>
+        <ScrollView style={{flex:1,backgroundColor:this.props.colors.background}}>
         {console.log(this.state.Hollywood)}
           <HeaderBar/>
           {this.state.loading?
@@ -77,13 +82,7 @@ export default class MovieScreen extends Component {
 }
 
 
-const styles = StyleSheet.create({
-  container:{
-    backgroundColor:"white"
-  },
-  heading:{
-    fontWeight:"bold",
-    fontSize:19,
-    marginStart:10
-  }
-  });
+
+
+
+export default MovieScreen(ClassComponent)  
