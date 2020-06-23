@@ -81,10 +81,7 @@ const VideoPlayerScreen = ({route})=>{
            >{title}</Text>
           <View style={{flexDirection:"row"}}>
           <Text style={{fontSize:12, color:'#262626',marginBottom:7 }}>{channel}</Text>
-          {/* <TouchableOpacity onPress={()=>setDropdown(!dropdown)}>
-          <MaterialIcons name={dropdown?'arrow-drop-up':'arrow-drop-down'} 
-          style={{marginLeft:'70%' }} size={20} color="black" />
-          </TouchableOpacity> */}
+      
           </View>
         </View>        
         </View>

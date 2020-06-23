@@ -65,7 +65,7 @@ export default function SearchScreen( {navigation} ){
       
       
  
-      {loading ?<ActivityIndicator style={{marginTop:10}} size="large" color="red"/>:null } 
+      {loading ?<ActivityIndicator style={{marginTop:10}} size="large" color="#3edced"/>:null } 
       <View>
       
       <FlatList

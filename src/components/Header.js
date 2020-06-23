@@ -1,19 +1,13 @@
 import React from 'react';
 import {View, Text} from "react-native"
 import { useNavigation ,useTheme} from '@react-navigation/native';
-import {useDispatch,useSelector} from 'react-redux'
-import DarkModeToggle from "react-dark-mode-toggle";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 
 export default function HeaderBar() {
   const navigation = useNavigation()
-  const dispatch = useDispatch()
   const {colors} =  useTheme()
-  const theme = useSelector(state=>{
-
-    return state.DarkMode
-  })
+  
   
 
     return (
@@ -38,12 +32,9 @@ export default function HeaderBar() {
       <Text style={{color:"#3edced", fontWeight:"bold",  fontSize:21}}>Box</Text>
       </View>
 
-      <MaterialIcons style={{color:"#3edced",padding:10}} name="search" size={25}
+      <MaterialIcons style={{color:"#3edced",marginEnd:20}} name="search" size={25}
       onPress={()=>navigation.navigate("SearchScreen")}  />
-
-      <MaterialIcons style={{color:colors.text,padding:10}} name="account-circle" size={25}
-      onPress={()=>dispatch({type:"changeTheme",payload:!theme})}  />
-      
+     
       </View>
 
  

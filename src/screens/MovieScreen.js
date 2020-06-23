@@ -61,7 +61,7 @@ class ClassComponent extends Component {
         {console.log(this.state.Hollywood)}
           <HeaderBar/>
           {this.state.loading?
-          <ActivityIndicator style={{marginTop:"80%"}} size="large" color="red"/>:
+          <ActivityIndicator style={{marginTop:"80%"}} size="large" color="#3edced"/>:
           <View>
          
          
