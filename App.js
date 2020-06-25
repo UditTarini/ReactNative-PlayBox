@@ -1,5 +1,5 @@
 import React from "react";
-
+import { StatusBar } from 'react-native';
 import HomeScreen from "./src/screens/HomeScreen"
 import SearchScreen from "./src/screens/SearchScreen"
 import MenuScreen from "./src/screens/MenuScreen"
@@ -14,8 +14,8 @@ import { createMaterialBottomTabNavigator  } from '@react-navigation/material-bo
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import {Provider, useSelector} from 'react-redux'
 import {createStore,combineReducers} from 'redux'
-import {reducer} from './src/Reducers/Reducer'
-import {themeReducer} from './src/Reducers/themeReducer'
+
+import {themeReducer} from './src/Reducers/Reducers'
 
 
 const customDefaultTheme={
@@ -27,7 +27,7 @@ const customDefaultTheme={
 }
 
 const rootReducer = combineReducers({
-  Data:reducer,
+ 
   DarkMode:themeReducer
 })
 
@@ -76,10 +76,7 @@ const StackScreen=()=> {
 }
 
 export  function MainNavigation() {
-  
-  let theme = useSelector(state=>{
-    return state.DarkMode
-  })
+  let theme = useSelector(state=>{return state.DarkMode })
 
   return (
    
@@ -88,6 +85,7 @@ export  function MainNavigation() {
         <Stack.Screen name="StackScreen" component={StackScreen} />
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
         <Stack.Screen name="VideoPlayerScreen" component={VideoPlayerScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
    
@@ -98,6 +96,7 @@ export  function MainNavigation() {
 export default function App(){
   return(
   <Provider store={store}> 
+        <StatusBar hidden />
         <MainNavigation/>
   </Provider>)
 }

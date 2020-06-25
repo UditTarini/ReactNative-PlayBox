@@ -8,9 +8,6 @@ import {fetchData} from '../Utils/Functions'
 
 export default function SearchScreen( {navigation} ){
     const {colors} =  useTheme()
-    const mycolor = colors.iconColor
-
-   
     const [value,setValue] = useState("")
     const [cardData, setData] = useState([])
     const [loading,setLoading] = useState(false)
@@ -29,35 +26,25 @@ export default function SearchScreen( {navigation} ){
   global.screenHeight = Math.round(Dimensions.get('window').height) - 80;
 
   return(
-      <View style={{ flex:1, }}>
+      <View style={{ flex:1}}>
           
 
-      <View style={{
-          top: 0,
-          left:0,
-          right:0,
-          backgroundColor:"#fff",
-          flexDirection:"row",
-          justifyContent: "center",
-          alignItems:"center",
-          height:60,
-          borderBottomColor: 'grey',
-          borderBottomWidth: 1}} >
+      <View style={{...styles.container,backgroundColor:colors.background, borderBottomColor: colors.border }} >
         
-          <Ionicons style={{ color: "black",marginRight:20 }} name="md-arrow-back" size={32}
+          <Ionicons style={{ color: "#3edced",marginRight:20 }} name="md-arrow-back" size={25}
           onPress={()=>navigation.goBack()}
             />
          
             <TextInput
-              style={{ width:"70%",height:40 ,backgroundColor: "#e6e6e6", borderRadius: 12, fontSize: 15 }}
+              style={{...styles.textInput, backgroundColor: colors.border,color:colors.text }}
               placeholder="search..."
-              placeholderTextColor = "#000"
+              placeholderTextColor = {colors.text}
               onChangeText={text => setValue(text)} 
               value={value}
               onSubmitEditing={() => fetchResult()}
               />
         
-           <Ionicons style={{color:"black",marginLeft:20}} name="md-send" size={32}
+           <Ionicons style={{color:"#3edced",marginLeft:20}} name="md-send" size={23}
                onPress={()=>fetchResult()}
                />
            
@@ -90,4 +77,24 @@ export default function SearchScreen( {navigation} ){
   )
 }
 
+
+const styles = StyleSheet.create({
+    container: {
+        top: 0,
+        left:0,
+        right:0,
+        flexDirection:"row",
+        justifyContent: "center",
+        alignItems:"center",
+        height:60,
+        borderBottomWidth: 1
+     },
+    textInput:{
+        width:"70%",
+        height:40 ,
+        paddingStart:15,
+        borderRadius: 12,
+        fontSize: 15
+    }
+  });
 

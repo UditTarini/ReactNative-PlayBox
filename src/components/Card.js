@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View,Image,Dimensions,TouchableOpacity} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import {  Text, View,Image,Dimensions,TouchableOpacity} from 'react-native';
 import { useNavigation ,useTheme} from '@react-navigation/native';
 import {fetchLogo,fetchVideoInfo,abbreviateNumber} from '../Utils/Functions'
 
@@ -12,7 +11,7 @@ export default function CardItem(props){
   const [logo,setLogo] = useState(null)
   const [vidInfo,setinfo] = useState("")
 
-  useEffect(() => {
+useEffect(() => {
     
     fetchLogo(props.channelId).then((resp) => {setLogo(resp)})
     fetchVideoInfo(props.videoId).then((resp)=>{setinfo(resp)})

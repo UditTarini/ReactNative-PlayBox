@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import {useDispatch,useSelector} from 'react-redux'
 import {useTheme} from '@react-navigation/native';
@@ -12,7 +12,7 @@ export default function MenuScreen() {
   
       return state.DarkMode
     })
-    return (
+   return (
      <View style={{ flex: 1,backgroundColor:colors.background}}>
      <HeaderBar/>   
      <View style={{backgroundColor:colors.card}}>
@@ -23,7 +23,7 @@ export default function MenuScreen() {
         value={theme}
         style={{marginEnd:10}}
         onValueChange={()=>dispatch({type:"changeTheme",payload:!theme})}
-      />
+           />
       </View>
       <Text style={{...styles.text,color:colors.text}}>Rate this app</Text>
       <Text style={{...styles.text,color:colors.text}}>Feedback</Text>
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
     padding:20,
     marginStart:5,
   }
-});
+})

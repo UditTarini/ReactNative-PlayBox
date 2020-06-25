@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { StyleSheet, Text, View,Image,Dimensions,TouchableOpacity} from 'react-native';
+import {Text, View,Image,Dimensions,TouchableOpacity} from 'react-native';
 import { useNavigation,useTheme } from '@react-navigation/native';
 import {fetchVideoInfo,abbreviateNumber,fetchLogo} from '../Utils/Functions'
 
@@ -7,7 +7,6 @@ import {fetchVideoInfo,abbreviateNumber,fetchLogo} from '../Utils/Functions'
 export default function CardItem2(props){
     const navigation = useNavigation();
     const {colors} = useTheme()
-    const textcolor = colors.iconColor
     const [logo,setLogo] = useState(null)
     const [vidInfo,setinfo] = useState("")
 
@@ -33,15 +32,15 @@ export default function CardItem2(props){
                    paddingRight:10, 
                    fontSize:17,
                    width:Dimensions.get("screen").width/2,
-                   color:textcolor
+                   color:colors.text
                }}
                ellipsizeMode="tail"
                numberOfLines={3}
               >{props.title}</Text>
-               <Text style={{fontSize:12,  color:textcolor}}>{props.channel}</Text>
+               <Text style={{fontSize:12,  color:colors.text}}>{props.channel}</Text>
                <View style={{flexDirection:"row"}}>
-               <Text style={{fontSize:12, color:textcolor}}>{abbreviateNumber(vidInfo.viewCount)} Views</Text>
-               <Text style={{fontSize:12, color:textcolor, marginLeft:8 }}>{abbreviateNumber(vidInfo.likeCount)} Likes</Text>
+               <Text style={{fontSize:12, color:colors.text}}>{abbreviateNumber(vidInfo.viewCount)} Views</Text>
+               <Text style={{fontSize:12, color:colors.text, marginLeft:8 }}>{abbreviateNumber(vidInfo.likeCount)} Likes</Text>
                </View>
            </View>
     </View>

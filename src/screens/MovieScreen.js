@@ -58,13 +58,10 @@ class ClassComponent extends Component {
       return(
         
         <ScrollView style={{flex:1,backgroundColor:this.props.colors.background}}>
-        {console.log(this.state.Hollywood)}
-          <HeaderBar/>
+         <HeaderBar/>
           {this.state.loading?
           <ActivityIndicator style={{marginTop:"80%"}} size="large" color="#3edced"/>:
           <View>
-         
-         
           <LargeCarousel data={this.state.Data} type={'q'} />
           <SmallCarousel heading={'Most Popular'} type={'q'} data={this.state.MostPopular} />          
           <SmallCarousel heading={'Trending'} type={'q'} data={this.state.Trending} />          

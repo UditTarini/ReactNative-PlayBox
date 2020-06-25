@@ -4,21 +4,26 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import CardItem2 from '../components/Card2'
+import {useTheme} from '@react-navigation/native'
 import {fetchData,abbreviateNumber} from '../Utils/Functions'
 
+
+
 export const BottomIcon=(props)=>{
+  const {colors} =  useTheme()
   return(
   <View style={{flexDirection:"column", alignItems: 'center'}}>
   { props.icon=='a'?
-  <AntDesign name={props.name} size={25} color="#616161"/>:
-  <MaterialIcons name={props.name} size={25} color="#616161"/>
+  <AntDesign name={props.name} size={25} color='grey'/>:
+  <MaterialIcons name={props.name} size={25} color='grey'/>
   }
-  <Text style={{fontSize:10,padding:5,color:'#262626'}}>{props.count}</Text>
+  <Text style={{fontSize:10,padding:5,color:colors.text}}>{props.count}</Text>
   </View>)
 }
 
 const VideoPlayerScreen = ({route})=>{
-
+  const {colors} =  useTheme()
+    
     let screenWidth = Dimensions.get('window').width
     let screenHeight = Dimensions.get('window').height
 
@@ -67,7 +72,7 @@ const VideoPlayerScreen = ({route})=>{
         }}
         /> 
         <ScrollView>
-        <View style={{borderBottomWidth: 1,  borderBottomColor: 'grey'}}>
+        <View style={{borderBottomWidth: 1,  borderBottomColor: colors.border}}>
         <View style={{flexDirection:"row", margin:5  }}>
         
         <Image 
@@ -75,12 +80,12 @@ const VideoPlayerScreen = ({route})=>{
          source={{uri:logo}} />
 
         <View style={{ marginLeft:10}} >
-          <Text style={{paddingRight:10,fontSize:17, width:Dimensions.get("screen").width - 50,color:"black"}}
+          <Text style={{paddingRight:10,fontSize:17, width:Dimensions.get("screen").width - 50,color:colors.text}}
            ellipsizeMode="tail"
            numberOfLines={2}
            >{title}</Text>
           <View style={{flexDirection:"row"}}>
-          <Text style={{fontSize:12, color:'#262626',marginBottom:7 }}>{channel}</Text>
+          <Text style={{fontSize:12, color:"grey",marginBottom:7 }}>{channel}</Text>
       
           </View>
         </View>        
@@ -96,12 +101,12 @@ const VideoPlayerScreen = ({route})=>{
            <BottomIcon name={dropdown?'arrow-drop-up':'arrow-drop-down'}/>
            </TouchableOpacity>
         </View>
-        {dropdown?<Text style={{color:"black",padding:10,paddingHorizontal:20}}>{description}</Text>:null}
+        {dropdown?<Text style={{color:colors.text,padding:10,paddingHorizontal:20}}>{description}</Text>:null}
        
         </View>
     
        
-        {loading ?<ActivityIndicator style={{marginTop:10}} size="large" color="red"/>:null } 
+        {loading ?<ActivityIndicator style={{marginTop:10}} size="large" color="#3edced"/>:null } 
         <View>
         
         <FlatList

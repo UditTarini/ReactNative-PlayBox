@@ -38,9 +38,6 @@ class ClassComponent extends Component {
         <Tab heading="Music" {...tabProps}>
           <SongTab />
         </Tab>
-        <Tab heading="Music" {...tabProps}>
-        <SongTab />
-      </Tab>
       <Tab heading="Tech" {...tabProps}>
       <TechTab />
       </Tab>
