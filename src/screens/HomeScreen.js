@@ -25,7 +25,7 @@ class ClassComponent extends Component {
     };
 
     return (
-      <Container style={{backgroundColor:"red"}}>
+      <Container style={{backgroundColor:"black"}}>
         <HeaderBar/>
         
         <Tabs tabContainerStyle={{height: 30}} tabBarUnderlineStyle={{height: 0}} renderTabBar={()=> <ScrollableTab  />}>
