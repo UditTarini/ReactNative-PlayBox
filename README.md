@@ -1,7 +1,9 @@
 # ReactNative-PlayBox
-A personalized version of Youtube
+A personalized version of Youtube for Android and IOS
+
+#### Click [here](https://youtu.be/yY5x_BJK8E4) to see a demo video
 ## Screenshots
 
-![Group 4](https://user-images.githubusercontent.com/42527124/85916591-ee78db80-b86f-11ea-95cf-ad969ca8adfc.png)
+![Group 4](src/assets/Group%204.png)
 
-![Group 3](https://user-images.githubusercontent.com/42527124/85916404-25e68880-b86e-11ea-8098-ac58548ae2a0.png)
+![Group 3](src/assets/Group%203.png)
